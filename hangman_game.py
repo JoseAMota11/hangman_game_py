@@ -1,19 +1,17 @@
 from random import choice
 import re
 from os import system
-
 clear = lambda: system("cls")
 
 def user_input(question, answer, res):
   try:
     attempts = 10
-    message = ""
     while attempts >= 0:
       if attempts == 0:
-        message = f"The word was {answer.upper()}.\n"
+        print(f"The word was {answer.upper()}.\n")
         break
       if question == answer.upper():
-        message = f"¡Congratulations, you won! The right word is {question}.\n"
+        print(f"¡Congratulations, you won! The right word is {question}.\n")
         break
       if attempts != 10: print(f"You have {attempts} attempst left.\n")
       print(question)
@@ -27,13 +25,11 @@ def user_input(question, answer, res):
           for m in re.finditer(user_guess, answer):
             res[m.start()] = user_guess.upper()
           question = "".join(res)
-          print(question)
           attempts -= 1
           clear()
         else:
           attempts -= 1
           clear()
-    print(message)
   except TypeError:
     print("You cannot type numbers.")
   except ValueError:
